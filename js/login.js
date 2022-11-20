@@ -12,24 +12,32 @@ loginFormId.addEventListener('submit', function loginFunc(e){
         'username': emailInput,
         'password': passwordInput
     }
-    fetch(LOGIN_URL_API, {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json'
-        },
+
+    const header = {
+        method: 'POST',
+        headers: { "Content-Type": "application/json"},
         body: JSON.stringify(loginData)
-    }).then((response) => {
-        if (!response.ok){
+    }
+    fetch(LOGIN_URL_API, header)
+    .then(response => {
+        if (response.ok){
+            return response.json()
+        }
+        return Promise.reject(response);
+    })
+    .then(data => {
+        localStorage.setItem('user', data.username);
+        localStorage.setItem('token', data.token);
+        // return <Navigate to="/register" />
+    })
+    .catch((errresp) => {
+        errresp.json().then(err => {
             let errorMessageAlert = document.getElementById('errorMessageAlert');
             let errorMsg = document.getElementById('errorMsg');
-            response.json().then((errMsg) => {
-                errorMsg.innerHTML = errMsg.error;
-                if (errorMessageAlert.style.display != 'block'){
-                    errorMessageAlert.style.display = 'block';
-                }
-            })
-        }
+            errorMsg.innerHTML = err.error;
+            if (errorMessageAlert.style.display != 'block'){
+                errorMessageAlert.style.display = 'block';
+            }
+        })
     })
-    // .then((data) => console.log(data));
 });

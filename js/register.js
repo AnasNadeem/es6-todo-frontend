@@ -41,15 +41,27 @@ registerFormId.addEventListener('submit', function registerFunc(e){
       'email': email.value,
       'password': password.value
   }
-  console.log(registerData)
+
+  const header = {
+    method: 'POST',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify(registerData)
+  }
+  fetch(REGISTER_URL_API, header)
+  .then(resp => {
+      if(resp.status===201){
+          return resp.json()
+      }
+      return Promise.reject(resp);
+  })
+  .then(data => {
+      console.log(data)
+  })
+  .catch((errresp) => {
+      errresp.json().then(err => {
+          console.log('error:', err)
+      })
+  })
+
 })
-// fetch(REGISTER_URL_API, {
-//     method: 'post',
-//     headers: {
-//       'Accept': 'application/json, text/plain, */*',
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(registerData)
-// }).then((response) => response.json())
-//   .then((data) => console.log(data));
-// })
+
