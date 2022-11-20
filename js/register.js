@@ -1,26 +1,38 @@
-const BASE_API = "http://falakfatma.pythonanywhere.com/"
-const AUTH_URL = BASE_API + "api/auth/"
-const REGISTER_URL_API = AUTH_URL + "login"
+const BASE_API = "http://falakfatma.pythonanywhere.com/";
+const AUTH_URL = BASE_API + "api/auth/";
+const REGISTER_URL_API = AUTH_URL + "register";
 
-let loginFormId = document.getElementById('loginFormId');
+let registerFormId = document.getElementById('registerFormId');
 
-loginFormId.addEventListener('submit', function loginFunc(e){
-    e.preventDefault();
-  let firstNameInput =document.getElementById('FirstNameInput').value
-  let lastNameInput =document.getElementById('LastNameInput').value
-    let emailInput = document.getElementById('emailInput').value;
-    let passwordInput = document.getElementById('passwordInput').value;
-    const loginData = {
-        'username': emailInput,
-        'password': passwordInput
-    }
-    fetch(REGISTER_URL_API, {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(loginData)
-    }).then((response) => response.json())
-    .then((data) => console.log(data));
-});
+registerFormId.addEventListener('submit', function registerFunc(e){
+  e.preventDefault();
+  let firstName =document.getElementById('firstName');
+  let lastName =document.getElementById('lastName');
+  let email = document.getElementById('email');
+  let password = document.getElementById('password');
+
+  let errorMsgTemplate = `<span class="invalid-feedback">Field cannot be blank</span>`
+
+  // TODO - Check this for all in a single go
+  if (email.value === ''){
+    email.classList = 'form-control is-invalid';
+    email.insertAdjacentHTML('afterend', errorMsgTemplate);
+  }
+  const registerData = {
+      'firstname': firstName.value,
+      'lastname': lastName.value,
+      'email': email.value,
+      'password': password.value
+  }
+  console.log(registerData)
+})
+// fetch(REGISTER_URL_API, {
+//     method: 'post',
+//     headers: {
+//       'Accept': 'application/json, text/plain, */*',
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(registerData)
+// }).then((response) => response.json())
+//   .then((data) => console.log(data));
+// })

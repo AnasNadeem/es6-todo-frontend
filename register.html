@@ -16,29 +16,33 @@
 <body>
   <div class="container">
     <h1>Register</h1>
-    <form>
+
+    <form id="registerFormId">
+
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">First Name</label>
-        <input type="text" class="form-control" id="FirstNameInput" aria-describedby="emailHelp">
+        <input type="text" class="form-control" id="firstName">
       </div>
+
       <div class="mb-3">
-      
         <label for="LastName" class="form-label">Last Name</label>
-        <input type="text" class="form-control" id="lName" aria-describedby="emailHelp">
+        <input type="text" class="form-control" id="lastName">
       </div>
+
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
+        <input type="email" class="form-control" id="email" required>
       </div>
         
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="passwordInput">
+        <input type="password" class="form-control" id="password" required>
       </div>
 
-      <button type="submit" class="btn btn-primary" id="loginFormId">Submit</button>
-  </div>
+      <button type="submit" class="btn btn-primary">Register</button>
     </form>
+
+  </div>
   <!-- Optional JavaScript; choose one of the two! -->
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -46,7 +50,6 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
   <script src="js/register.js"></script>
-  <script src="js/index.js"></script>
   <!-- Option 2: Separate Popper and Bootstrap JS -->
   <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
