@@ -19,6 +19,17 @@ loginFormId.addEventListener('submit', function loginFunc(e){
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(loginData)
-    }).then((response) => response.json())
-    .then((data) => console.log(data));
+    }).then((response) => {
+        if (!response.ok){
+            let errorMessageAlert = document.getElementById('errorMessageAlert');
+            let errorMsg = document.getElementById('errorMsg');
+            response.json().then((errMsg) => {
+                errorMsg.innerHTML = errMsg.error;
+                if (errorMessageAlert.style.display != 'block'){
+                    errorMessageAlert.style.display = 'block';
+                }
+            })
+        }
+    })
+    // .then((data) => console.log(data));
 });
