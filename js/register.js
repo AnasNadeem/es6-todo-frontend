@@ -8,11 +8,12 @@ registerFormId.addEventListener('submit', function registerFunc(e){
   e.preventDefault();
   let firstName =document.getElementById('firstName');
   let lastName =document.getElementById('lastName');
+  let username = document.getElementById('username');
   let email = document.getElementById('email');
   let password = document.getElementById('password');
 
   let errorMsgTemplate = `<span class="invalid-feedback">Field cannot be blank</span>`
-  let invalidFeedback = document.getElementsByClassName('invalid-feedback');
+  // let invalidFeedback = document.getElementsByClassName('invalid-feedback');
 
   // TODO - Check this for all in a single go
   if (email.value === ''){
@@ -36,8 +37,9 @@ registerFormId.addEventListener('submit', function registerFunc(e){
      return
   }
   const registerData = {
-      'firstname': firstName.value,
-      'lastname': lastName.value,
+      'first_name': firstName.value,
+      'last_name': lastName.value,
+      'username': username.value,
       'email': email.value,
       'password': password.value
   }
@@ -59,9 +61,16 @@ registerFormId.addEventListener('submit', function registerFunc(e){
   })
   .catch((errresp) => {
       errresp.json().then(err => {
-          console.log('error:', err)
+        console.log('error:', err)
+        let errorMessageAlert = document.getElementById('errorMessageAlert');
+        let errorMsg = document.getElementById('errorMsg');
+        for (const [key, value] of Object.entries(err)) {
+          errorMsg.innerHTML += `${key}: ${value} <br>`;
+        }
+        if (errorMessageAlert.style.display != 'block'){
+            errorMessageAlert.style.display = 'block';
+        }
       })
   })
 
 })
-
