@@ -6,10 +6,10 @@ let loginFormId = document.getElementById('loginFormId');
 
 loginFormId.addEventListener('submit', function loginFunc(e){
     e.preventDefault();
-    let emailInput = document.getElementById('emailInput').value;
+    let userInput = document.getElementById('userInput').value;
     let passwordInput = document.getElementById('passwordInput').value;
     const loginData = {
-        'username': emailInput,
+        'username': userInput,
         'password': passwordInput
     }
 
