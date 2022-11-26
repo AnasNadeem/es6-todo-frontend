@@ -1,18 +1,30 @@
 const BASE_API = "https://falakfatma.pythonanywhere.com/"
 const AUTH_URL = BASE_API + "api/"
-const TASK_URL_API = AUTH_URL + "todoslist/"
+const TASK_URL_API = AUTH_URL + "todoslist"
 const token = localStorage.getItem('token')
-const headersData = {"Authorization": token}
+const headersData = {"Authorization": `Bearer ${token}`}
 
 // GET TASK
 const getTask = () => {
   const headersMethodGet = {method:'GET', headers: headersData}
   fetch(TASK_URL_API, headersMethodGet)
   .then((resp) => {
-    console.log(resp)
+    return resp.json()
+  })
+  .then((data) => {
+    console.log(data)
   })
 }
 window.onload = getTask()
+
+// DELETE TASK
+const deleteTask = () => {
+  const headersMethodDelete = {method:'DELETE', headers: headersData}
+  fetch(TASK_URL_API, headersMethodDelete)
+  .then((resp) => {
+    console.log(resp)
+  })
+}
 
 // CREATE TASK 
 const createTask = (e) => {
