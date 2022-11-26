@@ -1,4 +1,4 @@
-const BASE_API = "http://falakfatma.pythonanywhere.com/"
+const BASE_API = "https://falakfatma.pythonanywhere.com/"
 const AUTH_URL = BASE_API + "api/auth/"
 const LOGIN_URL_API = AUTH_URL + "login"
 
