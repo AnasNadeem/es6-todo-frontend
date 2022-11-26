@@ -52,6 +52,7 @@ registerFormId.addEventListener('submit', function registerFunc(e){
   fetch(REGISTER_URL_API, header)
   .then(resp => {
       if(resp.status===201){
+          document.location = 'login.html'
           return resp.json()
       }
       return Promise.reject(resp);

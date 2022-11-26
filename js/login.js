@@ -26,9 +26,9 @@ loginFormId.addEventListener('submit', function loginFunc(e){
         return Promise.reject(response);
     })
     .then(data => {
-        localStorage.setItem('user', data.username);
+        localStorage.setItem('username', data.username);
         localStorage.setItem('token', data.token);
-        // return <Navigate to="/register" />
+        document.location = 'task.html'
     })
     .catch((errresp) => {
         errresp.json().then(err => {
