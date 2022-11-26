@@ -1,20 +1,30 @@
-const BASE_API = "http://falakfatma.pythonanywhere.com/"
+const BASE_API = "https://falakfatma.pythonanywhere.com/"
 const AUTH_URL = BASE_API + "api/"
-const TASK_URL_API = AUTH_URL + "todoslist"
+const TASK_URL_API = AUTH_URL + "todoslist/"
+const token = localStorage.getItem('token')
+const headersData = {"Authorization": token}
+
+// GET TASK
+const getTask = () => {
+  const headersMethodGet = {method:'GET', headers: headersData}
+  fetch(TASK_URL_API, headersMethodGet)
+  .then((resp) => {
+    console.log(resp)
+  })
+}
+window.onload = getTask()
 
 // CREATE TASK 
-let taskFormId = document.getElementById('taskFormId');
-
-loginFormId.addEventListener('submit', function loginFunc(e){
+const createTask = (e) => {
     e.preventDefault();
     let taskName = document.getElementById('taskName').value;
     const todoslistData = {
-        'name': taskName,
+        'name': taskName
     }
-
+    
     const header = {
         method: 'POST',
-        headers: { "Content-Type": "application/json"},
+        headers: headersData,
         body: JSON.stringify(todoslistData)
     }
     fetch(TASK_URL_API, header)
@@ -25,9 +35,7 @@ loginFormId.addEventListener('submit', function loginFunc(e){
         return Promise.reject(response);
     })
     .then(data => {
-        localStorage.setItem('user', data.username);
-        localStorage.setItem('token', data.token);
-        // return <Navigate to="/register" />
+        return data;
     })
     .catch((errresp) => {
         errresp.json().then(err => {
@@ -39,4 +47,7 @@ loginFormId.addEventListener('submit', function loginFunc(e){
             }
         })
     })
-});
+};
+
+let taskFormId = document.getElementById('taskFormId');
+taskFormId.addEventListener('submit', createTask)
