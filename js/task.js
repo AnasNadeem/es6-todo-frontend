@@ -50,8 +50,9 @@ const createTask = (e) => {
         errresp.json().then(err => {
             let errorMessageAlert = document.getElementById('errorMessageAlert');
             let errorMsg = document.getElementById('errorMsg');
-            console.log('Error', err)
-            errorMsg.innerHTML = err;
+            for (const error in err) {
+              errorMsg.innerHTML += `${error} ${err[error]}`;
+            }
             if (errorMessageAlert.style.display != 'block'){
                 errorMessageAlert.style.display = 'block';
             }
