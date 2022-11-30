@@ -7,7 +7,6 @@ let taskListId = document.getElementById('taskListId');
 
 // GET TASK
 const getTask = () => {
-
   const headersMethodGet = {method:'GET', headers: headersData}
   fetch(TASK_URL_API, headersMethodGet)
   .then((resp) => {
@@ -15,7 +14,12 @@ const getTask = () => {
   })
   .then((data) => {
     data.forEach(task => {
-      taskListId.innerHTML += `<li class="list-group-item" id="task${task.id}">${task.name}</li>`;
+      taskListId.innerHTML += `
+      <li class="list-group-item" id="task${task.id}" onclick=deleteTask(${task.id})>
+        ${task.name}
+        <i class="fa-solid fa-trash float-end"></i>
+      </li>
+      `;
     });
   })
 }
@@ -43,7 +47,11 @@ const createTask = (e) => {
         return Promise.reject(response);
     })
     .then(data => {
-        taskListId.innerHTML += `<li class="list-group-item" id="task${data.id}">${data.name}</li>`;
+        taskListId.innerHTML += `
+        <li class="list-group-item" id="task${data.id}">
+          ${data.name}
+        <i class="fa-solid fa-trash float-end"></i>
+        </li>`;
         return data;
     })
     .catch((errresp) => {
@@ -64,10 +72,14 @@ let taskFormId = document.getElementById('taskFormId');
 taskFormId.addEventListener('submit', createTask)
 
 // DELETE TASK
-const deleteTask = () => {
+const deleteTask = (id) => {
+  let taskElem = document.getElementById(`task${id}`);
   const headersMethodDelete = {method:'DELETE', headers: headersData}
-  fetch(TASK_URL_API, headersMethodDelete)
-  .then((resp) => {
-    console.log(resp)
+  fetch(`${TASK_URL_API}/${id}`, headersMethodDelete)
+  .then(resp => {
+    if (resp.ok){
+      taskElem.remove()
+      return resp
+    }
   })
 }
