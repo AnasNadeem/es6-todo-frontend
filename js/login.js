@@ -4,6 +4,10 @@ const LOGIN_URL_API = AUTH_URL + "login"
 
 let loginFormId = document.getElementById('loginFormId');
 
+if(localStorage.getItem('token')){
+    document.location = 'index.html'
+}
+
 loginFormId.addEventListener('submit', function loginFunc(e){
     e.preventDefault();
     let userInput = document.getElementById('userInput').value;
@@ -27,8 +31,9 @@ loginFormId.addEventListener('submit', function loginFunc(e){
     })
     .then(data => {
         localStorage.setItem('username', data.username);
+        localStorage.setItem('user', data.id);
         localStorage.setItem('token', data.token);
-        document.location = 'task.html'
+        document.location = 'index.html'
     })
     .catch((errresp) => {
         errresp.json().then(err => {
