@@ -33,7 +33,7 @@ loginFormId.addEventListener('submit', function loginFunc(e){
         localStorage.setItem('username', data.username);
         localStorage.setItem('user', data.id);
         localStorage.setItem('token', data.token);
-        document.location = 'index.html'
+        document.location = 'todo.html';
     })
     .catch((errresp) => {
         errresp.json().then(err => {
